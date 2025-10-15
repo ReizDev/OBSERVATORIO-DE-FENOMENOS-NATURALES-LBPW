@@ -1,12 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Observatorio de Fenomenos Naturales</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Observatorio de Fenómenos Naturales</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Leaflet CSS -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<!-- Leaflet JS -->
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
 </head>
 <body>
-    
+  <header>
+    <h1>🌌 Observatorio de Fenómenos Naturales</h1>
+  </header>
+
+  <main>
+    <section id="form-section">
+      <h2>Reporta un fenómeno</h2>
+      <form id="report-form">
+        <input type="text" id="title" placeholder="Título del fenómeno" required />
+        <textarea id="description" placeholder="Descripción detallada" required></textarea>
+        <input type="text" id="location" placeholder="Ubicación (ciudad, región)" required />
+        <button type="submit">Enviar reporte</button>
+      </form>
+    </section>
+
+    <section id="map-section">
+      <h2>Mapa de reportes</h2>
+      <div id="map" style="height: 400px;"></div>
+    </section>
+  </main>
+
+  <script src="components/map.js"></script>
+  <script src="components/form.js"></script>
 </body>
 </html>
