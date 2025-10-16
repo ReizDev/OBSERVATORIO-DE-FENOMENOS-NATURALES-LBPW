@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("report-form");
   const reportsContainer = document.getElementById("reports-container");
