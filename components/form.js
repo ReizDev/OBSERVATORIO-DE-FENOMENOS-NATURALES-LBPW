@@ -26,3 +26,8 @@ document.getElementById("report-form").addEventListener("submit", async function
   alert("Reporte añadido al mapa.");
   this.reset();
 });
+
+
+document.getElementById("toggle-theme").addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+});
