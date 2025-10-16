@@ -11,7 +11,7 @@ app.use(express.json());
 // Ruta para guardar reportes
 app.post("/api/report", (req, res) => {
   const newReport = req.body;
-  const filePath = path.join(__dirname, "data", "reports.json");
+  const filePath = path.join(__dirname, "data", "data/reports.json");
 
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) return res.status(500).send("Error al leer el archivo");
