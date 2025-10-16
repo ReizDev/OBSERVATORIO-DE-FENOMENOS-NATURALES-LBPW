@@ -1,0 +1,24 @@
+{
+  "name": "observatorio-de-fenomenos-naturales-lbpw",
+  "version": "1.0.0",
+  "description": "PSDES",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ReizDev/OBSERVATORIO-DE-FENOMENOS-NATURALES-LBPW.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ReizDev/OBSERVATORIO-DE-FENOMENOS-NATURALES-LBPW/issues"
+  },
+  "homepage": "https://github.com/ReizDev/OBSERVATORIO-DE-FENOMENOS-NATURALES-LBPW#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
