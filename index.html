@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Observatorio de Fenómenos Naturales</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="login.css">
   <!-- Leaflet CSS -->
 <link
   rel="stylesheet"
@@ -21,6 +22,15 @@
   <header>
     <h1>🌌 Observatorio de Fenómenos Naturales o Extraños</h1>
     <button id="toggle-theme">🌗 Cambiar modo</button>
+  <div id="auth-buttons">
+    <button id="login-btn">Iniciar sesión</button>
+    <button id="register-btn">Registrarse</button>
+    <span id="user-info" style="display: none;">
+      <img id="user-pic" src="" alt="Perfil" width="32" height="32" style="border-radius: 50%;" />
+      <span id="username"></span>
+      <button id="logout-btn">Cerrar sesión</button>
+    </span>
+  </div>
   </header>
 
   <main>
