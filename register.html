@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro de Usuario</title>
+  <link rel="stylesheet" href="login.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #1e1e1e;
+      color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      background: #2c2c2c;
+    }
+
+    header img {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .register-container {
+      background: #2c2c2c;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      width: 300px;
+      margin: 4rem auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 4px;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.6rem;
+      background: #15d71c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #faa701;
+    }
+
+    .error {
+      color: #ff6b6b;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .social-register {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .social-register button {
+      background: #444;
+      color: white;
+      border: none;
+      padding: 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .social-register button:hover {
+      background: #666;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">
+      <img src="img/LOGO FAVICON.png" alt="Logo StrawMaps" />
+    </a>
+  </header>
+
+  <section>
+    <div class="register-container">
+      <h2>Crear cuenta</h2>
+      <div class="error" id="error-msg"></div>
+      <form id="register-form">
+        <input type="text" id="new-username" placeholder="Usuario" required />
+        <input type="email" id="new-email" placeholder="Correo electrónico" required />
+        <input type="password" id="new-password" placeholder="Contraseña" required />
+        <button type="submit">Registrarse</button>
+      </form>
+
+      <div class="social-register">
+        <button onclick="window.location.href='/auth/facebook'">Registrarse con Facebook</button>
+        <button onclick="window.location.href='/auth/google'">Registrarse con Google</button>
+        <button onclick="window.location.href='/auth/telegram'">Registrarse con Telegram</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById("register-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const username = document.getElementById("new-username").value;
+      const email = document.getElementById("new-email").value;
+      const password = document.getElementById("new-password").value;
+
+      try {
+        const res = await fetch("/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, email, password }),
+        });
+
+        if (!res.ok) {
+          const msg = await res.text();
+          document.getElementById("error-msg").textContent = msg;
+          return;
+        }
+
+        const data = await res.json();
+        localStorage.setItem("token", data.token);
+        window.location.href = "index.html"; // Redirige al mapa
+      } catch (err) {
+        document.getElementById("error-msg").textContent = "Error de conexión.";
+      }
+    });
+  </script>
+</body>
+</html>
