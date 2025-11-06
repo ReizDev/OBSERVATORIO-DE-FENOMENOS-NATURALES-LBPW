@@ -33,7 +33,10 @@ document.getElementById("report-form").addEventListener("submit", async function
   this.reset();
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  localStorage.setItem("username", "reiz");
+  localStorage.setItem("userPic", "img/reiz-avatar.png");
 
-document.getElementById("toggle-theme").addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
+  const name = localStorage.getItem("username");
+  console.log("Bienvenido, " + name);
 });
