@@ -6,12 +6,9 @@
   <link rel="shortcut icon" href="img/LOGO OBSERVATORIO.png" type="image/x-icon">
   <title>Observatorio de Fenomenos Naturales</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="login.css">
   <!-- Leaflet CSS -->
-
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
-
 <body>
   <header>
     <a href="index.html">
@@ -31,10 +28,10 @@
   </header>
 
 <section id="form-section">
-  <h2>📢 Reporta un fenómeno</h2>
+  <h2>📢Reporta un fenómeno</h2>
   <div class="form-layout">
     <aside class="form-sidebar">
-      <h3>🌐 Tipos de fenómeno</h3>
+      <h3>Tipos de fenómeno</h3>
       <ul>
         <li><label><input type="radio" name="tipo" value="sismo" /> 🌋 Sismo</label></li>
         <li><label><input type="radio" name="tipo" value="tormenta" /> 🌩 Tormenta</label></li>
@@ -51,11 +48,8 @@
       <input type="text" id="location" placeholder="Ubicación (ciudad, región)" required />
       <button type="submit">Enviar reporte</button>
     </form>
-
   </div>
 </section>
-
-      
       <script>
   document.getElementById("report-form").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -100,7 +94,7 @@
         <li><button class="filter-btn" data-type="incendio">🔥 Incendios</button></li>
         <li><button class="filter-btn" data-type="otros">✨ Otros</button></li>
       </ul>
-
+<!--AÑADIR MODULO ESTADISTICO-->
       <div class="archivo-stats">
         <h4>📈 Estadísticas</h4>
         <p>Total reportes: <span id="total-reportes">--</span></p>
@@ -110,17 +104,14 @@
 
     <!-- Contenedor de reportes -->
     <div id="lista-reportes" class="archivo-cards">
-      <!-- Aquí se insertan dinámicamente los reportes -->
     </div>
   </div>
 </section>
   </main>
-
-
+  <!--Componente principal del mapa No tocar-->
   <script src="components/map.js"></script>
   <script src="components/form.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 </body>
 <footer>
   <div class="footer-grid">

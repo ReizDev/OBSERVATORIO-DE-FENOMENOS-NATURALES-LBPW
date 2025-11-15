@@ -1,128 +1,60 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Inicio de Sesión</title>
+  <title>Inicio de Sesión | Observatorio</title>
   <link rel="stylesheet" href="login.css">
   <link rel="shortcut icon" href="img/LOGO OBSERVATORIO.png" type="image/x-icon">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #1e1e1e;
-      color: #f0f0f0;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      padding: 1rem;
-      background: #2c2c2c;
-    }
-
-    header img {
-      width: 95px;
-      height: 105px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .login-container {
-      background: #2c2c2c;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      width: 300px;
-      margin: 4rem auto;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    input {
-      width: 100%;
-      padding: 0.6rem;
-      margin-bottom: 1rem;
-      border: none;
-      border-radius: 4px;
-    }
-
-    button {
-      width: 100%;
-      padding: 0.6rem;
-      background: #15d71c;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #faa701;
-    }
-
-    .error {
-      color: #ff6b6b;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    .social-login {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-
-    .social-login button {
-      background: #b61111;
-      color: white;
-      border: none;
-      padding: 0.6rem;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .social-login button:hover {
-      background: #666;
-    }
-
-
-    header{
-      text-decoration: none;
-      color: white;
-      text-rendering: auto;
-      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-    }
-  </style>
 </head>
 <body>
+
+  <!--  Encabezado -->
   <header>
     <a href="index.html">
-      <img src="img/LOGO OBSERVATORIO.png" alt="Logo StrawMaps" />
+      <img src="img/LOGO OBSERVATORIO.png" alt="Logo del Observatorio" />
     </a>
+      <span id="user-info" style="display: none;">
+    <img id="user-pic" src="" alt="Perfil" width="32" height="32" style="border-radius: 50%;" />
+    <span id="username"></span>
+    <button id="logout-btn">Cerrar sesión</button>
+  </span>
+</div>
+    </span>
+  </div>
   </header>
-  <section>
-    <div class="login-container">
-      <h2>Iniciar sesión</h2>
-      <div class="error" id="error-msg"></div>
-      <form id="login-form">
-        <input type="text" id="username" placeholder="Usuario" required />
-        <input type="password" id="password" placeholder="Contraseña" required />
-        <button type="submit">Entrar</button>
-      </form>
 
-      <div class="social-login">
-        <button onclick="window.location.href='/auth/facebook.com'">Iniciar con Facebook</button>
-        <button onclick="window.location.href='/auth/google.com'">Iniciar con Google</button>
-        <button onclick="window.location.href='/auth/telegram.com'"">Iniciar con Telegram</button>
-      </div>
-    </div>
-  </section>
+  <!--  Sección de login -->
+  <main>
+    <section class="login-container">
+      <h2> Iniciar sesión</h2>
+      <div class="error" id="error-msg"></div>
+
+<h2>Login</h2>
+<form method="post" action="/Account/Login">
+    <input type="text" name="username" placeholder="Usuario" required />
+    <input type="password" name="password" placeholder="Contraseña" required />
+    <button type="submit">Entrar</button>
+</form>
+<p></p>
+<div class="social-login">
+  <p>O inicia con:</p>
+
+  <button class="social-btn facebook-btn">
+    <img src="img/facebook-1-svgrepo-com.svg" alt="Facebook" />
+  </button>
+  <button class="social-btn google-btn">
+    <img src="img/google.svg" alt="Google" />
+  </button>
+  <button class="social-btn telegram-btn">
+    <img src="img/telegram-svgrepo-com.svg" alt="Telegram" />
+  </button>
+</div>
+
+    </section>
+  </main>
+
   <script>
     document.getElementById("login-form").addEventListener("submit", async function (e) {
       e.preventDefault();
@@ -144,11 +76,15 @@
 
         const data = await res.json();
         localStorage.setItem("token", data.token);
-        window.location.href = "index.html"; // Redirige al mapa
+        window.location.href = "index.html";
       } catch (err) {
         document.getElementById("error-msg").textContent = "Error de conexión.";
       }
     });
+
+    document.querySelector(".facebook-btn").onclick = () => window.location.href = "/auth/facebook.com";
+    document.querySelector(".google-btn").onclick = () => window.location.href = "/auth/google.com";
+    document.querySelector(".telegram-btn").onclick = () => window.location.href = "/auth/telegram.com";
   </script>
 </body>
 </html>
