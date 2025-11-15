@@ -16,7 +16,7 @@ body {
   line-height: 1.6;
 }
 
-/*  Header */
+/* 🔷 Header */
 #main-header {
   display: flex;
   justify-content: space-between;
@@ -57,7 +57,7 @@ body {
   color: #000;
 }
 
-/*  Hero */
+/* 🧭 Hero */
 .hero {
   text-align: center;
   padding: 60px 20px;
@@ -88,7 +88,8 @@ body {
 .cta-button:hover {
   transform: scale(1.05);
 }
-/*  Features */
+
+/* 🧩 Features */
 .features {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -119,7 +120,7 @@ body {
   transform: scale(1.05);
 }
 
-/*  About */
+/* 🌀 About */
 .about {
   padding: 40px 20px;
   background-color: #eaf4ff;
@@ -137,7 +138,7 @@ body {
   transform: scale(1.05);
 }
 
-/*  Footer */
+/* 🔻 Footer */
 footer {
   background-color: #1a1a1a;
   color: #ccc;
@@ -181,7 +182,7 @@ footer {
   filter: brightness(0.8);
 }
 
-/*  Responsive */
+/* 📱 Responsive */
 @media screen and (max-width: 600px) {
   #main-header {
     flex-direction: column;

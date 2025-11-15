@@ -16,35 +16,5 @@
     "description": "se registra un temblor magnitud 4.3",
     "location": "linares",
     "date": "7/11/2025, 11:17:03 p.m."
-  },
-  {
-    "title": "caida de nieve 01010",
-    "description": "01010101",
-    "location": "monterrey",
-    "date": "15/11/2025, 12:57:49 p.m."
-  },
-  {
-    "title": "Temblor",
-    "description": "temblor en la parte norte",
-    "location": "General Escobedo",
-    "date": "15/11/2025, 1:05:41 p.m."
-  },
-  {
-    "title": "cambio de region",
-    "description": "dwfw",
-    "location": "Apodaca",
-    "date": "15/11/2025, 4:48:15 p.m."
-  },
-  {
-    "title": "cambio de region",
-    "description": "dwfw",
-    "location": "Apodaca",
-    "date": "15/11/2025, 4:48:17 p.m."
-  },
-  {
-    "title": "Tormenta",
-    "description": "Tormenitna",
-    "location": "san pedro garza garcia",
-    "date": "15/11/2025, 4:50:33 p.m."
   }
 ]
