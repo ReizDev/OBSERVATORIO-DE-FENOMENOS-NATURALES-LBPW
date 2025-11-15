@@ -28,12 +28,6 @@ document.getElementById("report-form").addEventListener("submit", async function
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ title, description, location, lat, lon }),
   });
-    await fetch("/reports.js", {
-    method: "POST",
-    headers: { "Content-Type": "js/reports.js" },
-    body: JSON.stringify({ title, description, location, lat, lon }),
-  });
-
 
   alert("Reporte guardado y añadido al mapa.");
   this.reset();
@@ -46,27 +40,3 @@ document.addEventListener("DOMContentLoaded", () => {
   const name = localStorage.getItem("username");
   console.log("Bienvenido, " + name);
 });
-
-
-
-function guardarLocalmente(reporte) {
-  const previos = JSON.parse(localStorage.getItem("reportes-local")) || [];
-  previos.push(reporte);
-  localStorage.setItem("reportes-local", JSON.stringify(previos));
-}
-
-function enviarAlServidor(reporte) {
-  fetch("http://localhost:3000/api/reportes", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(reporte)
-  })
-  .then(res => res.text())
-  .then(msg => {
-    console.log("🪶 Confirmación del servidor:", msg);
-  })
-  .catch(err => {
-    console.warn("⚠️ Servidor no disponible. Guardando localmente.");
-    guardarLocalmente(reporte);
-  });
-}

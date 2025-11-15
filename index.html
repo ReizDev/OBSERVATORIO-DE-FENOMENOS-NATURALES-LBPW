@@ -3,170 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="shortcut icon" href="img/LOGO OBSERVATORIO.png" type="image/x-icon">
-  <title>Observatorio de Fenomenos Naturales</title>
+  <link rel="shortcut icon" href="img/Logo Tienda para Fiestas Ilustrado Azul.jpg" type="image/x-icon">
+  <title>StrawMaps</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="login.css">
   <!-- Leaflet CSS -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<!-- Leaflet JS -->
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+<script src="js/reports.js"></script>
 </head>
-
 <body>
   <header>
-    <a href="index.html">
-  <img src="img/LOGO OBSERVATORIO.png" alt="Logo StrawMaps" width="96" height="105"  cursor:pointer; />
-</a>
+    <h1>🌌 Observatorio de Fenómenos Naturales o Extraños</h1>
+    <button id="toggle-theme">🌗 Cambiar modo</button>
   <div id="auth-buttons">
-  <a href="login.html"><button id="login-btn">Iniciar sesión</button></a>
-  <a href="register.html"><button id="register-btn">Registrarse</button></a>
-  <span id="user-info" style="display: none;">
-    <img id="user-pic" src="" alt="Perfil" width="32" height="32" style="border-radius: 50%;" />
-    <span id="username"></span>
-    <button id="logout-btn">Cerrar sesión</button>
-  </span>
-</div>
+    <button id="login-btn">Iniciar sesión</button>
+    <button id="register-btn">Registrarse</button>
+    <span id="user-info" style="display: none;">
+      <img id="user-pic" src="" alt="Perfil" width="32" height="32" style="border-radius: 50%;" />
+      <span id="username"></span>
+      <button id="logout-btn">Cerrar sesión</button>
     </span>
   </div>
   </header>
 
-<section id="form-section">
-  <h2>📢 Reporta un fenómeno</h2>
-  <div class="form-layout">
-    <aside class="form-sidebar">
-      <h3>🌐 Tipos de fenómeno</h3>
-      <ul>
-        <li><label><input type="radio" name="tipo" value="sismo" /> 🌋 Sismo</label></li>
-        <li><label><input type="radio" name="tipo" value="tormenta" /> 🌩 Tormenta</label></li>
-        <li><label><input type="radio" name="tipo" value="incendio" /> 🔥 Incendio</label></li>
-        <li><label><input type="radio" name="tipo" value="otros" /> ✨ Otro</label></li>
-      </ul>
-      <p>🧭 Selecciona el tipo para clasificar tu reporte y activar el archivo simbólico.</p>
-    </aside>
+  <main>
+    <section id="form-section">
+      <h2>Reporta un fenómeno</h2>
+      <form id="report-form">
+        <input type="text" id="title" placeholder="Título del fenómeno" required />
+        <textarea id="description" placeholder="Descripción detallada" required></textarea>
+        <input type="text" id="location" placeholder="Ubicación (ciudad, región)" required />
+        <button type="submit">Enviar reporte</button>
+      </form>
+    </section>
 
-    <!-- Formulario principal -->
-    <form id="report-form">
-      <input type="text" id="title" placeholder="Título del fenómeno" required />
-      <textarea id="description" placeholder="Descripción detallada" required></textarea>
-      <input type="text" id="location" placeholder="Ubicación (ciudad, región)" required />
-      <button type="submit">Enviar reporte</button>
-    </form>
+    <section id="map-section">
+      <h2>Mapa de reportes</h2>
+      <div id="map" style="height: 400px;"></div>
+    </section>
 
-  </div>
-</section>
-
-      
-      <script>
-  document.getElementById("report-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const title = document.getElementById("title").value.trim();
-    const description = document.getElementById("description").value.trim();
-    const location = document.getElementById("location").value.trim();
-
-    const newReport = {
-      title,
-      description,
-      location,
-      date: new Date().toLocaleString()
-    };
-
-    fetch("http://localhost:3000/api/reportes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newReport)
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log(" Reporte guardado en archivo:", data);
-    })
-    .catch(err => {
-      console.error(" Error al guardar el reporte:", err);
-    });
-  });
-</script>
-<section id="map-section">
-  <h2>📜 Reportes Recientes</h2>
-  <div class="archivo-layout">
-          <div id="map" style="height: 400px;"></div>
-    <!-- Panel lateral -->
-    <aside class="archivo-sidebar">
-      <h3>🔍 Filtrar por tipo</h3>
-      <ul>
-        <li><button class="filter-btn" data-type="sismo">🌋 Sismos</button></li>
-        <li><button class="filter-btn" data-type="tormenta">🌩 Tormentas</button></li>
-        <li><button class="filter-btn" data-type="incendio">🔥 Incendios</button></li>
-        <li><button class="filter-btn" data-type="otros">✨ Otros</button></li>
-      </ul>
-
-      <div class="archivo-stats">
-        <h4>📈 Estadísticas</h4>
-        <p>Total reportes: <span id="total-reportes">--</span></p>
-        <p>Último fenómeno: <span id="ultimo-reporte">--</span></p>
+    <section id="reports-section">
+      <h2>Reportes Enviados</h2>
+      <div id="reports-container">
       </div>
-    </aside>
-
-    <!-- Contenedor de reportes -->
-    <div id="lista-reportes" class="archivo-cards">
-      <!-- Aquí se insertan dinámicamente los reportes -->
-    </div>
-  </div>
-</section>
+    </section>
   </main>
-
 
   <script src="components/map.js"></script>
   <script src="components/form.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 </body>
-<footer>
-  <div class="footer-grid">
-    <div class="footer-section">
-      <h4>Contenido</h4>
-      <ul>
-        <li><a href="reportes.html">Reportes</a></li>
-        <li><a href="mapa.html">Mapa interactivo</a></li>
-        <li><a href="archivo.html">Archivo histórico</a></li>
-        <li><a href="iconos.html">Iconografía simbólica</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-section">
-      <h4>Herramientas</h4>
-      <ul>
-        <li><a href="api.html">API del Observatorio</a></li>
-        <li><a href="dashboard.html">Panel de control</a></li>
-        <li><a href="visualizador.html">Visualizador de datos</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-section">
-      <h4>Ayuda</h4>
-      <ul>
-        <li><a href="faq.html">Preguntas frecuentes</a></li>
-        <li><a href="soporte.html">Soporte técnico</a></li>
-        <li><a href="licencias.html">Licencias y uso</a></li>
-        <li><a href="tutoriales.html">Tutoriales</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-section">
-      <h4>Compañía</h4>
-      <ul>
-        <li><a href="equipo.html">Nuestro equipo</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-        <li><a href="blog.html">Blog del Observatorio</a></li>
-        <li><a href="prensa.html">Prensa y medios</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-section">
-      <h4>Redes Sociales</h4>
-      <div class="social-icons">
-        <a href="#"><img src="img/facebook-1-svgrepo-com.svg" alt="Facebook" /></a>
-        <a href="#"><img src="img/instagram-1-svgrepo-com.svg" alt="Instagram" />
-
 </html>

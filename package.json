@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/ReizDev/OBSERVATORIO-DE-FENOMENOS-NATURALES-LBPW#readme",
   "dependencies": {
-    "cors": "^2.8.5",
     "express": "^5.1.0"
   }
 }

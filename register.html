@@ -19,7 +19,6 @@
       align-items: center;
       padding: 1rem;
       background: #2c2c2c;
-
     }
 
     header img {
@@ -95,7 +94,7 @@
 <body>
   <header>
     <a href="index.html">
-      <img src="img/LOGO OBSERVATORIO.png" alt="Logo StrawMaps" />
+      <img src="img/LOGO FAVICON.png" alt="Logo StrawMaps" />
     </a>
   </header>
 
@@ -104,11 +103,11 @@
       <h2>Crear cuenta</h2>
       <div class="error" id="error-msg"></div>
       <form id="register-form">
-  <input type="text" name="username" placeholder="Nombre de usuario" required />
-  <input type="password" name="password" placeholder="Contraseña" required />
-  <button type="submit">Registrarme</button>
-</form>
-<div id="mensaje-registro"></div>
+        <input type="text" id="new-username" placeholder="Usuario" required />
+        <input type="email" id="new-email" placeholder="Correo electrónico" required />
+        <input type="password" id="new-password" placeholder="Contraseña" required />
+        <button type="submit">Registrarse</button>
+      </form>
 
       <div class="social-register">
         <button onclick="window.location.href='/auth/facebook'">Registrarse con Facebook</button>
