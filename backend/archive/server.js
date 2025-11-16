@@ -1,5 +1,4 @@
 //servidor de prueba para guardado de informacion
-
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -29,7 +28,7 @@ app.post("/api/reportes", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🛰️ Servidor escuchando en http://localhost:${PORT}`);
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
 
 app.get("/", (req, res) => {
