@@ -4,29 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Iniciar sesión</title>
-  <link rel="stylesheet" href="index.html">
   <style>
     body {
+      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #1e1e1e;
-      color: #f0f0f0;
       display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
     }
 
+    /* Header traslúcido */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px 20px;
+      background:#2c3e50; /* azul con transparencia */
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      backdrop-filter: blur(6px); /* efecto glass */
+      z-index: 1000;
+    }
+
+    header img {
+      height: 60px;
+      width: 60px;
+    }
+
+    /* Layout dividido */
+    .left-side {
+      flex: 1;
+      background: url("img/telescope-4806386_1920.jpg") no-repeat center center;
+      background-size: cover;
+    }
+
+    .right-side {
+      flex: 1;
+      background:#2c3e50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     .login-container {
-      background: #2c2c2c;
+      background: #2f4ca3;
       padding: 2rem;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
       width: 300px;
+      max-width: 90%;
+      margin-top: 60px; /* espacio para el header */
     }
 
     h2 {
       text-align: center;
       margin-bottom: 1rem;
+      color: #fff;
     }
 
     input {
@@ -34,21 +68,22 @@
       padding: 0.6rem;
       margin-bottom: 1rem;
       border: none;
-      border-radius: 4px;
+      border-radius: 24px;
     }
 
     button {
       width: 100%;
       padding: 0.6rem;
-      background: #4caf50;
-      color: white;
+      background: #212a5d;
+      color: rgb(255, 255, 255);
       border: none;
-      border-radius: 4px;
+      border-radius: 10px;
       cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
 
     button:hover {
-      background: #45a049;
+      background: #546ebc;
     }
 
     .error {
@@ -56,45 +91,40 @@
       text-align: center;
       margin-bottom: 1rem;
     }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .left-side, .right-side {
+        flex: none;
+        height: 50vh;
+      }
+      .login-container {
+        margin-top: 80px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <h2>Iniciar sesión</h2>
-    <div class="error" id="error-msg"></div>
-    <form id="login-form">
-      <input type="text" id="username" placeholder="Usuario" required />
-      <input type="password" id="password" placeholder="Contraseña" required />
-      <button type="submit">Entrar</button>
-    </form>
+  <!-- Header traslúcido -->
+  <header>
+    <a href="index2.html">
+      <img src="img/BCO.e6d7dd8f-4e61-441c-9e1b-46fb37f973a5.png" alt="Logo Observatorio" />
+    </a>
+  </header>
+  <div class="left-side"></div>
+  <div class="right-side">
+    <div class="login-container">
+      <h2>Iniciar sesión</h2>
+      <div class="error" id="error-msg"></div>
+      <form id="login-form">
+        <input type="text" id="username" placeholder="Usuario" required />
+        <input type="password" id="password" placeholder="Contraseña" required />
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
   </div>
-
-  <script>
-    document.getElementById("login-form").addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-
-      try {
-        const res = await fetch("/api/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, password }),
-        });
-
-        if (!res.ok) {
-          const msg = await res.text();
-          document.getElementById("error-msg").textContent = msg;
-          return;
-        }
-
-        const data = await res.json();
-        localStorage.setItem("token", data.token);
-        window.location.href = "index.html"; // Redirige al mapa
-      } catch (err) {
-        document.getElementById("error-msg").textContent = "Error de conexión.";
-      }
-    });
-  </script>
 </body>
 </html>
