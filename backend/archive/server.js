@@ -1,4 +1,4 @@
-// 🧩 Servidor de archivo vivo para reportes
+// 
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -11,12 +11,12 @@ const archivo = path.join(__dirname, "reportes.json");
 app.use(cors());
 app.use(express.json());
 
-// 🌐 Ruta raíz
+//  Ruta raíz
 app.get("/", (req, res) => {
   res.send("🌐 No deberías estar husmeando cosas ajenas.");
 });
 
-// 📝 Guardar reporte en JSON
+// Guardar reporte en JSON
 app.post("/api/reportes", (req, res) => {
   const nuevoReporte = req.body;
   let reportes = [];
@@ -31,7 +31,7 @@ app.post("/api/reportes", (req, res) => {
   res.status(200).json({ mensaje: "✅ Reporte archivado con éxito. Tu presencia ha sido registrada en el Observatorio." });
 });
 
-// 📊 Estadísticas por tipo
+// Estadísticas por tipo
 app.get("/api/stats", (req, res) => {
   if (!fs.existsSync(archivo)) return res.json({ total: 0, porTipo: {} });
 
@@ -44,14 +44,14 @@ app.get("/api/stats", (req, res) => {
   res.json({ total: reportes.length, porTipo });
 });
 
-// 📰 Últimos reportes
+// Últimos reportes
 app.get("/api/ultimos-reportes", (req, res) => {
   if (!fs.existsSync(archivo)) return res.json([]);
   const reportes = JSON.parse(fs.readFileSync(archivo, "utf-8"));
   res.json(reportes.slice(-10).reverse());
 });
 
-// 🚀 Inicio del servidor
+// Inicio del servidor
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  console.log(`Servidor escuchando en http//localhost:${PORT}`);
 });
